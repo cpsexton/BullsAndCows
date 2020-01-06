@@ -4,7 +4,6 @@
 #include <string>
 
 
-
 void PrintIntro();
 void PlayGame();
 std::string GetGuess();
