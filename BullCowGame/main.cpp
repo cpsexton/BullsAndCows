@@ -8,21 +8,18 @@ using namespace std;
 void PrintIntro();
 void PlayGame();
 string GetGuess();
+bool PlayAgain();
 
 int main() {
-	PrintIntro();
-	PlayGame();
-	
+	do {
+		PrintIntro();
+		PlayGame();
+	} while ( PlayAgain() ); //replays the game until user responds no
+
 	return 0; //exit the game
 }
 
 
-void PlayGame() {
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++) {
-		GetGuess();
-	};
-}
 
 	//introduce the game
 void PrintIntro() {
@@ -36,6 +33,12 @@ void PrintIntro() {
 	return;
 }
 	
+void PlayGame() {
+	constexpr int NUMBER_OF_TURNS = 5;
+	for (int count = 1; count <= NUMBER_OF_TURNS; count++) {
+		GetGuess();
+	};
+}
 	//get a guess from the player
 string GetGuess() {
 	string Guess = "";
@@ -47,8 +50,13 @@ string GetGuess() {
 	//repeat the guess back to the player
 	cout << "You have entered: " << Guess << endl;
 	cout << endl;
-	cout << "You have used " << count << " attempts."; //this is broken. count needs to be a var of number of attempts taken
-	cout << endl;
 	
 	return Guess;
+}
+
+bool PlayAgain() {
+	string Response = "";
+	cout << "Would you like to play again?";
+	getline(cin, Response);
+	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
