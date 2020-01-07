@@ -1,14 +1,20 @@
 #include "fBullCowGame.h"
 
-int fBullCowGame::GetMaxTries() { return MyMaxTries; }
-int fBullCowGame::GetCurrentTry() { return MyCurrentTry; }
+fBullCowGame::fBullCowGame() { Reset(); }
+
+int fBullCowGame::GetMaxTries() const { return MyMaxTries; }
+int fBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
 void fBullCowGame::Reset()
 {
+	constexpr int MAX_TRIES = 5;
+	MyMaxTries = MAX_TRIES;
+	
+	MyCurrentTry = 1;
 	return;
 }
 
-bool fBullCowGame::IsGameWon()
+bool fBullCowGame::IsGameWon() const
 {
 	return false;
 }
