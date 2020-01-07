@@ -11,11 +11,11 @@ public:
 	bool IsGameWon() const;
 	
 	void Reset(); // TODO make a more rich return value.
-	bool CheckGuessValidity(std::string);
-
+	bool CheckGuessValidity(std::string); // TODO make a more rich return value.
+	// TODO provide a method for counting bulls & cows, & increasing try #.
 
 private:
-	// see consturctor for initialisation
+	// see constructor for initialisation
 	int MyCurrentTry;
 	int MyMaxTries;
 };

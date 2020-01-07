@@ -26,6 +26,7 @@ int main() {
 	//introduce the game
 void PrintIntro() {
 	constexpr int WORD_LENGTH = 4;
+	std::cout << std::endl << std::endl;
 	std::cout << "Welcome to Bulls and Cows!\n";
 	std::cout << std::endl;
 	std::cout << "Can you guess the " << WORD_LENGTH; 
@@ -55,7 +56,6 @@ std::string GetGuess() {
 	//repeat the guess back to the player
 	std::cout << "You have entered: " << Guess << std::endl;
 	std::cout << std::endl;
-	
 	return Guess;
 }
 
