@@ -2,12 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include "fBullCowGame.h"
 
 
 void PrintIntro();
 void PlayGame();
 std::string GetGuess();
 bool PlayAgain();
+
+fBullCowGame BCGame; //creates instance of a new game
 
 int main() {
 	do {
@@ -22,8 +25,8 @@ int main() {
 
 	//introduce the game
 void PrintIntro() {
-	constexpr int WORD_LENGTH = 9;
-	std::cout << "Welcome to Bull and Cows!\n";
+	constexpr int WORD_LENGTH = 4;
+	std::cout << "Welcome to Bulls and Cows!\n";
 	std::cout << std::endl;
 	std::cout << "Can you guess the " << WORD_LENGTH; 
 	std::cout << " letter isogram I'm thinking of?\n";
@@ -31,10 +34,11 @@ void PrintIntro() {
 	std::cout << std::endl;
 	return;
 }
-	
+
 void PlayGame() {
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++) {
+	int MaxTries = BCGame.GetMaxTries();
+
+	for (int count = 1; count <= MaxTries; count++) {
 		GetGuess();
 	};
 }
@@ -42,9 +46,10 @@ void PlayGame() {
 std::string GetGuess() {
 	std::string Guess = "";
 	std::cout << std::endl;
-	std::cout << "Enter your guess: ";
+
+	int CurrentTry = BCGame.GetCurrentTry();
+	std::cout << "Attempt " << CurrentTry << ". Enter your guess: ";
 	std::getline(std::cin, Guess);
-	std::cout << std::endl;
 
 	//repeat the guess back to the player
 	std::cout << "You have entered: " << Guess << std::endl;
@@ -55,7 +60,7 @@ std::string GetGuess() {
 
 bool PlayAgain() {
 	std::string Response = "";
-	std::cout << "Would you like to play again?";
+	std::cout << "Would you like to play again (y/n)? ";
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
