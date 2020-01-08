@@ -1,11 +1,11 @@
 /* This is the console executable, that makes use of the BullCow class.
 This acts as the view in a MVC pattern, and is responsible for all
-user interaction. For game logic see the fBullCowGame class.
+user interaction. For game logic see the FBullCowGame class.
 */
 
 #include <iostream>
 #include <string>
-#include "fBullCowGame.h"
+#include "FBullCowGame.h"
 
 using FText = std::string;
 using int32 = int;
@@ -15,7 +15,7 @@ void PlayGame();
 FText GetGuess();
 bool PlayAgain();
 
-fBullCowGame BCGame; //creates instance of a new game
+FBullCowGame BCGame; //creates instance of a new game
 
 
 int main() {
