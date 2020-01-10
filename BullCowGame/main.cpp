@@ -12,7 +12,7 @@ using int32 = int;
 
 void PrintIntro();
 void PlayGame();
-FText GetGuess();
+FText GetValidGuess();
 bool PlayAgain();
 
 FBullCowGame BCGame; //creates instance of a new game
@@ -46,9 +46,8 @@ void PlayGame() {
 	int32 MaxTries = BCGame.GetMaxTries();
 
 	for (int32 count = 1; count <= MaxTries; count++) {
-		FText Guess = GetGuess();
+		FText Guess = GetValidGuess();
 	
-		EGuessStatus Status = BCGame.CheckGuessValidity(Guess);
 
 		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 		std::cout << "Bulls = " << BullCowCount.Bulls;
@@ -57,15 +56,23 @@ void PlayGame() {
 }
 
 	//get a guess from the player
-FText GetGuess() {
+FText GetValidGuess() {
 	FText Guess = "";
 	std::cout << std::endl;
-
 	int32 CurrentTry = BCGame.GetCurrentTry();
 	std::cout << "Attempt " << CurrentTry << ". Enter your guess: ";
 	std::getline(std::cin, Guess);
+		
+	EGuessStatus Status = BCGame.CheckGuessValidity(Guess);
+		switch (Status) {
+		case EGuessStatus::Wrong_Length:
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n";
+			break;
+		default:
+			return Guess;
+		}
 
-	return Guess;
+
 }
 
 bool PlayAgain() {
