@@ -31,7 +31,6 @@ public:
 	FBullCowCount SubmitValidGuess(FString);
 
 
-
 private:
 	// see constructor for initialisation
 	int32 MyCurrentTry;
