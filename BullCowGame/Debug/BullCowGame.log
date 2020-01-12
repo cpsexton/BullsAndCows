@@ -1,5 +1,5 @@
 ﻿  fBullCowGame.cpp
   main.cpp
   Generating Code...
-c:\users\cpsex\documents\unreal projects\section_02\bullcowgame\main.cpp(85): warning C4715: 'GetValidGuess': not all control paths return a value
+c:\users\cpsex\documents\unreal projects\section_02\bullcowgame\main.cpp(87): warning C4715: 'GetValidGuess': not all control paths return a value
   BullCowGame.vcxproj -> C:\Users\cpsex\Documents\Unreal Projects\Section_02\Debug\BullCowGame.exe
