@@ -57,24 +57,34 @@ void PlayGame() {
 
 	//get a guess from the player
 FText GetValidGuess() {
-	FText Guess = "";
-	std::cout << std::endl;
-	int32 CurrentTry = BCGame.GetCurrentTry();
-	std::cout << "Attempt " << CurrentTry << ". Enter your guess: ";
-	std::getline(std::cin, Guess);
-		
-	EGuessStatus Status = BCGame.CheckGuessValidity(Guess);
+	EGuessStatus Status = EGuessStatus::Invalid_Status;
+	do {
+		// get a guess from the player
+		FText Guess = "";
+		std::cout << std::endl;
+		int32 CurrentTry = BCGame.GetCurrentTry();
+		std::cout << "Attempt " << CurrentTry << ". Enter your guess: ";
+		std::getline(std::cin, Guess);
+
+		// check status and give feedback
+		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status) {
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n";
+			std::cout << "Error: Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n";
+			break;
+		case EGuessStatus::Not_Isogram:
+			std::cout << "Error: Please enter an isogram. (no repeating letters) \n";
+			break;
+		case EGuessStatus::Not_Lowercase:
+			std::cout << "Error: Please use lower case. \n";
 			break;
 		default:
 			return Guess;
 		}
-
-
+	} while (Status !=  EGuessStatus::OK);  // keep looping until we get no errors
 }
 
+// asks player to play again
 bool PlayAgain() {
 	FText Response = "";
 	std::cout << "Would you like to play again (y/n)? ";
