@@ -1,11 +1,12 @@
+#pragma once
 #include "FBullCowGame.h"
 #include <map>
-#define TMap std::map
+#define TMap std::map // to make syntax more Unreal friendly
 
 using FString = std::string;
 using int32 = int;
 
-FBullCowGame::FBullCowGame() { Reset(); }
+FBullCowGame::FBullCowGame() { Reset(); } // main constructor
 
 int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
@@ -14,8 +15,8 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 5;
-	const FString HIDDEN_WORD = "code";
+	constexpr int32 MAX_TRIES = 10;
+	const FString HIDDEN_WORD = "leaf"; // this be an isogram
 	
 	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;

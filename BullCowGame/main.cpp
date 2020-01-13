@@ -3,11 +3,14 @@ This acts as the view in a MVC pattern, and is responsible for all
 user interaction. For game logic see the FBullCowGame class.
 */
 
+#pragma once
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
 
+// makes syntax Unreal friendly
 using FText = std::string;
+using int32 = int;
 using int32 = int;
 
 void PrintIntro();
@@ -33,15 +36,16 @@ int main() {
 	//introduce the game
 void PrintIntro() {
 	std::cout << std::endl << std::endl;
-	std::cout << "Welcome to Bulls and Cows!\n";
+	std::cout << " Welcome to Bulls and Cows!\n";
 	std::cout << std::endl;
-	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
+	std::cout << " Can you guess the " << BCGame.GetHiddenWordLength();
 	std::cout << " letter isogram I'm thinking of?\n";
-	std::cout << "You get 5 attempts.\n";
+	std::cout << " You get " << BCGame.GetMaxTries() <<" attempts.\n";
 	std::cout << std::endl;
 	return;
 }
 
+// Plays a single game to completion
 void PlayGame() {
 	BCGame.Reset();
 	int32 MaxTries = BCGame.GetMaxTries();
@@ -53,10 +57,9 @@ void PlayGame() {
 	
 
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
-		std::cout << "Bulls = " << BullCowCount.Bulls;
+		std::cout << " Bulls = " << BullCowCount.Bulls;
 		std::cout << ". Cows = " << BullCowCount.Cows << std::endl;
 	};
-	// TODO summerise game
 	PrintGameSummary();
 }
 
@@ -68,39 +71,39 @@ FText GetValidGuess() {
 		FText Guess = "";
 		std::cout << std::endl;
 		int32 CurrentTry = BCGame.GetCurrentTry();
-		std::cout << "Attempt " << CurrentTry << " of " << BCGame.GetMaxTries() << ". Enter your guess : ";
+		std::cout << " Attempt " << CurrentTry << " of " << BCGame.GetMaxTries() << ". Enter your guess : ";
 		std::getline(std::cin, Guess);
 
 		// check status and give feedback
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status) {
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Error: Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n";
+			std::cout << " -Error: Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n";
 			break;
 		case EGuessStatus::Not_Isogram:
-			std::cout << "Error: Please enter an isogram. (no repeating letters) \n";
+			std::cout << " -Error: Please enter an isogram. (no repeating letters) \n";
 			break;
 		case EGuessStatus::Not_Lowercase:
-			std::cout << "Error: Please use lower case. \n";
+			std::cout << " -Error: Please use lower case. \n";
 			break;
 		default:
 			return Guess;
 		}
-	} while (Status !=  EGuessStatus::OK);  // keep looping until we get no errors
+	} while (Status != EGuessStatus::OK);  // keep looping until we get no errors
 }
 
 // asks player to play again
 bool PlayAgain() {
 	FText Response = "";
-	std::cout << "Would you like to play again with the same hidden word (y/n)? ";
+	std::cout << " Would you like to play again with the same hidden word (y/n)? ";
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
 
 void PrintGameSummary() {
 	if (BCGame.IsGameWon()) {
-		std::cout << std::endl << "WELL DONE - YOU WON! \n";
+		std::cout << std::endl << "     WELL DONE - YOU WON! \n";
 	} else {
-		std::cout << "Better luck next time! \n";
+		std::cout << std::endl << "     You Lose. Better luck next time! \n";
 	}
 }

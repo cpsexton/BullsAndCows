@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+// makes syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -25,9 +26,9 @@ public:
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
-	EGuessStatus CheckGuessValidity(FString) const; // TODO make a more rich return value.
+	EGuessStatus CheckGuessValidity(FString) const;
 	
-	void Reset(); // TODO make a more rich return value.
+	void Reset();
 	FBullCowCount SubmitValidGuess(FString);
 
 
